@@ -84,6 +84,8 @@ func verify_and_build():
 	if build_valid:
 		var new_tower = load("res://scene/turret/" + build_type + ".tscn").instance();
 		new_tower.position = build_location;
+		new_tower.built = true;
+		new_tower.type = build_type;
 		map_node.get_node("Turrets").add_child(new_tower, true);
 		map_node.get_node("TowerExclusion").set_cellv(build_tile, 5);
 		# Update cash
