@@ -15,7 +15,7 @@ func _ready():
 	map_node = get_node("Map1"); ## Turn this into a variable based on selected map
 	for i in get_tree().get_nodes_in_group("build_buttons"):
 		i.connect("pressed", self, "initiate_build_mode", [i.get_name()]);
-	start_next_wave();
+
 	
 func _process(delta):
 	if build_mode:
