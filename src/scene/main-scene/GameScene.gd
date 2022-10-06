@@ -11,6 +11,7 @@ func _ready():
 	map_node = get_node("Map1"); ## Turn this into a variable based on selected map
 	for i in get_tree().get_nodes_in_group("build_buttons"):
 		i.connect("pressed", self, "initiate_build_mode", [i.get_name()]);
+	spawn_wave()
 	
 func _process(delta):
 	if build_mode:
@@ -52,3 +53,13 @@ func verify_and_build():
 		new_tower.position = build_location;
 		map_node.get_node("Turrets").add_child(new_tower, true);
 		# Update cash
+
+func spawn_wave():
+	var enemies = [["blue_tank", 0.7], ["blue_tank", 0.1]]
+	for enemy in enemies:
+		var new_enemy = load("res://scene/enemies/" + enemy[0] + ".tscn").instance()
+		spawn_enemy(new_enemy, enemy[1])
+
+func spawn_enemy(enemy, timeout):
+	map_node.get_node("Path").add_child(enemy, true)
+	yield(get_tree().create_timer(timeout), "timeout")
