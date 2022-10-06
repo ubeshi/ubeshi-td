@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://asset/environment/tileset/terrainTiles_default.png" type="Texture" id=1]
 [ext_resource path="res://asset/environment/prop/crateWood.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scene/turret/GunT1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scene/turret/GunT2.gd" type="Script" id=9]
 [ext_resource path="res://scene/turret/MissileT1.gd" type="Script" id=10]
+[ext_resource path="res://scene/main/game_scene.gd" type="Script" id=11]
 
 [sub_resource type="TileSet" id=1]
 1/name = "terrainTiles_default.png 1"
@@ -131,7 +132,13 @@
 4/shapes = [  ]
 4/z_index = 0
 
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -35, 608, -34.8053, -0.15749, 34.8053, 0.15749, 192, 608, 0, 0, 0, 0, 224, 575, -0.15749, 35.4353, 0.15749, -35.4353, 224, 384, 0, 0, 0, 0, 256, 352, -31.6555, 0.15749, 31.6555, -0.15749, 320, 352, 0, 0, 0, 0, 352, 384, -0.235969, -34.9234, 0.235969, 34.9234, 352, 448, 0, 0, 0, 0, 384, 480, -35.8672, 0, 35.8672, 0, 703, 480, 0, 0, 0, 0, 736, 447, 0, 36.3392, 0, -36.3392, 736, 320, 0, 0, 0, 0, 768, 287, -35.3953, 0.235969, 35.3953, -0.235969, 960, 288, 0, 0, 0, 0, 992, 256, 0.235969, 33.9795, -0.235969, -33.9795, 992, 192, 0, 0, 0, 0, 1024, 160, 0, 0, 0, 0, 1343, 160 )
+}
+
 [node name="Map1" type="Node2D"]
+script = ExtResource( 11 )
 
 [node name="Ground" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -155,3 +162,6 @@ script = ExtResource( 9 )
 [node name="MissileT1" parent="Turrets" instance=ExtResource( 7 )]
 position = Vector2( 419, 224 )
 script = ExtResource( 10 )
+
+[node name="Path" type="Path2D" parent="."]
+curve = SubResource( 3 )
