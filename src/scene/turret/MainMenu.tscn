@@ -1,0 +1,124 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://asset/ui/art/background.png" type="Texture" id=1]
+[ext_resource path="res://asset/ui/buttons/blue_button05.png" type="Texture" id=2]
+[ext_resource path="res://asset/ui/buttons/blue_button03.png" type="Texture" id=3]
+[ext_resource path="res://resource/font/kenny-futurethin.tres" type="DynamicFont" id=4]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 5
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = -50.0
+margin_bottom = -50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin"]
+margin_left = 680.0
+margin_right = 1180.0
+margin_bottom = 620.0
+rect_min_size = Vector2( 500, 0 )
+size_flags_horizontal = 8
+custom_constants/separation = 30
+alignment = 1
+
+[node name="NewGame" type="TextureButton" parent="Margin/VBoxContainer"]
+margin_left = 75.0
+margin_top = 87.0
+margin_right = 425.0
+margin_bottom = 162.0
+rect_min_size = Vector2( 350, 75 )
+size_flags_horizontal = 4
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/NewGame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 4 )
+text = "New Game
+"
+align = 1
+valign = 1
+percent_visible = -0.142857
+
+[node name="Control" type="Control" parent="Margin/VBoxContainer"]
+margin_top = 192.0
+margin_right = 500.0
+margin_bottom = 217.0
+rect_min_size = Vector2( 25, 25 )
+
+[node name="Settings" type="TextureButton" parent="Margin/VBoxContainer"]
+margin_left = 75.0
+margin_top = 247.0
+margin_right = 425.0
+margin_bottom = 322.0
+rect_min_size = Vector2( 350, 75 )
+size_flags_horizontal = 4
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 4 )
+text = "Settings
+"
+align = 1
+valign = 1
+
+[node name="About" type="TextureButton" parent="Margin/VBoxContainer"]
+margin_left = 75.0
+margin_top = 352.0
+margin_right = 425.0
+margin_bottom = 427.0
+rect_min_size = Vector2( 350, 75 )
+size_flags_horizontal = 4
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/About"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 4 )
+text = "about"
+align = 1
+valign = 1
+
+[node name="Quit" type="TextureButton" parent="Margin/VBoxContainer"]
+margin_left = 75.0
+margin_top = 457.0
+margin_right = 425.0
+margin_bottom = 532.0
+rect_min_size = Vector2( 350, 75 )
+size_flags_horizontal = 4
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 2 )
+expand = true
+
+[node name="Label" type="Label" parent="Margin/VBoxContainer/Quit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 4 )
+text = "Quit
+"
+align = 1
+valign = 1

@@ -15,7 +15,7 @@ func _process(delta):
 func _physics_process(delta):
 	# Runs on every physics frame (different than render)
 	# Edit this in Project -> Project Settings -> Physics
-	turn()
+	turn();
 	
 func turn():
 	var enemy_position = get_global_mouse_position();
