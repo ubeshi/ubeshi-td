@@ -7,6 +7,7 @@
 [ext_resource path="res://asset/environment/prop/treeGreen_large.png" type="Texture" id=5]
 [ext_resource path="res://asset/environment/tileset/wasteland/tileset.png" type="Texture" id=6]
 [ext_resource path="res://scene/main/game_scene.gd" type="Script" id=10]
+[ext_resource path="res://asset/environment/tileset/obstructed.png" type="Texture" id=6]
 
 [sub_resource type="TileSet" id=1]
 1/name = "terrainTiles_default.png 1"
@@ -127,6 +128,20 @@
 4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 0
+5/name = "obstructed.png 5"
+5/texture = ExtResource( 6 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 64, 0, 64, 64 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
 
 [sub_resource type="TileSet" id=4]
 resource_local_to_scene = true
@@ -291,7 +306,6 @@ _data = {
 }
 
 [node name="Map1" type="Node2D"]
-script = ExtResource( 10 )
 
 [node name="Ground" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
