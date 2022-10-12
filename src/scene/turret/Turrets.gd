@@ -5,6 +5,7 @@ var enemy_array = [];
 var built = false;
 var enemy;
 var ready = true;
+var category;
 
 func _init():
     # Runs when the scene initializes
@@ -23,7 +24,8 @@ func _physics_process(delta):
     # Edit this in Project -> Project Settings -> Physics
     if enemy_array.size() != 0 and built:
         select_enemy();
-        turn();
+        if not get_node("AnimationPlayer").is_playing():
+            turn();
         if ready:
             fire();
     else:
@@ -39,9 +41,19 @@ func select_enemy():
 
 func fire():
     ready = false;
+    if category == "Projectile":
+        fire_projectile();
+    elif category == "Missile":
+        fire_missile();
     enemy.on_hit(GameData.tower_data[type]["damage"]);
     yield(get_tree().create_timer(GameData.tower_data[type]["rof"]), "timeout");
     ready = true;
+
+func fire_projectile():
+    get_node("AnimationPlayer").play("Fire");
+    
+func fire_missile():
+    pass;
 
 func turn():
     get_node("Turret").look_at(enemy.position);
