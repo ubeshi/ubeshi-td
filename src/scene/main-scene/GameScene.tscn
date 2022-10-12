@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scene/map/Map1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://asset/ui/buttons/blue_button12.png" type="Texture" id=2]
@@ -9,6 +9,21 @@
 [ext_resource path="res://asset/icon/forward.png" type="Texture" id=7]
 [ext_resource path="res://asset/icon/pause.png" type="Texture" id=8]
 [ext_resource path="res://asset/icon/fastForward.png" type="Texture" id=9]
+[ext_resource path="res://fonts/kenvector_future_thin.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://asset/icon/home.png" type="Texture" id=11]
+[ext_resource path="res://asset/ui/HPbar.jpg" type="Texture" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+outline_size = 2
+outline_color = Color( 0.215686, 0.12549, 0.627451, 0.486275 )
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_size = 2
+outline_color = Color( 0.215686, 0.12549, 0.627451, 0.486275 )
+font_data = ExtResource( 10 )
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource( 5 )
@@ -90,6 +105,64 @@ margin_bottom = 70.0
 rect_min_size = Vector2( 70, 70 )
 texture_normal = ExtResource( 9 )
 expand = true
+
+[node name="InfoBar" type="ColorRect" parent="UI/HUD"]
+self_modulate = Color( 0.0431373, 0.0313726, 0.196078, 0.513726 )
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/InfoBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Symbol" type="Label" parent="UI/HUD/InfoBar/HBoxContainer"]
+margin_right = 120.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 120, 60 )
+custom_fonts/font = SubResource( 1 )
+text = "$"
+align = 2
+valign = 1
+
+[node name="Money" type="Label" parent="UI/HUD/InfoBar/HBoxContainer"]
+margin_left = 124.0
+margin_right = 244.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 120, 60 )
+custom_fonts/font = SubResource( 2 )
+text = "0"
+valign = 1
+
+[node name="Icon" type="TextureRect" parent="UI/HUD/InfoBar/HBoxContainer"]
+margin_left = 742.0
+margin_right = 802.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+size_flags_horizontal = 10
+texture = ExtResource( 11 )
+expand = true
+
+[node name="HP" type="TextureProgress" parent="UI/HUD/InfoBar/HBoxContainer"]
+margin_left = 806.0
+margin_top = 15.0
+margin_right = 1206.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 400, 30 )
+size_flags_vertical = 4
+value = 100.0
+texture_under = ExtResource( 12 )
+texture_progress = ExtResource( 12 )
+tint_under = Color( 0.25098, 0.243137, 0.329412, 1 )
+tint_progress = Color( 0.564706, 1, 0.388235, 1 )
+nine_patch_stretch = true
+
+[node name="Tween" type="Tween" parent="UI/HUD/InfoBar/HBoxContainer/HP"]
+
+[node name="RightPadding" type="Control" parent="UI/HUD/InfoBar/HBoxContainer"]
+margin_left = 1210.0
+margin_right = 1280.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 70, 0 )
 
 [connection signal="pressed" from="UI/HUD/GameControls/PausePlay" to="UI" method="_on_PausePlay_pressed"]
 [connection signal="pressed" from="UI/HUD/GameControls/Speedup" to="UI" method="_on_Speedup_pressed"]
