@@ -91,6 +91,7 @@ func verify_and_build():
         new_tower.built = true;
         new_tower.type = build_type;
         new_tower.category = GameData.tower_data[build_type]["category"];
+        new_tower.connect("fire_missile", self, "on_fire_missile");
         map_node.get_node("Turrets").add_child(new_tower, true);
         map_node.get_node("TowerExclusion").set_cellv(build_tile, 5);
         # Update cash
@@ -101,3 +102,12 @@ func on_base_damage(damage):
         emit_signal("game_finished", false);
     else:
         get_node("UI").update_health_bar(base_health);
+
+func on_fire_missile(position, enemy, damage):
+    var new_missile = load("res://scene/support-scene/Missile.tscn").instance();
+    new_missile.position = position + Vector2(30, 30);
+    new_missile.enemy = enemy;
+    new_missile.velocity = enemy.position - position;
+    new_missile.damage = damage;
+    map_node.get_node("Projectiles").add_child(new_missile, true);
+    new_missile.look_at(enemy.position);
