@@ -7,6 +7,12 @@ var enemy;
 var ready = true;
 var category;
 
+var missile_anim_reload_time = 200;
+var missile1_anim_timer = 0;
+var missile2_anim_timer = 0;
+var missile1_node;
+var missile2_node;
+
 signal fire_missile(base_position, enemy, damage);
 
 func _init():
@@ -15,6 +21,9 @@ func _init():
 
 func _ready():
     if built:
+        if (category == "Missile"):
+            missile1_node = self.get_node("Turret/Missile1");
+            missile2_node = self.get_node("Turret/Missile2");
         self.get_node("Range/CollisionShape2D").get_shape().radius = 0.5 * GameData.tower_data[type]["range"];
 
 func _process(delta):
@@ -32,6 +41,18 @@ func _physics_process(delta):
             fire();
     else:
         enemy = null;
+
+    if (category == "Missile"):
+        if (missile1_anim_timer > 0):
+            missile1_anim_timer += 1;
+            if (missile1_anim_timer == missile_anim_reload_time):
+                missile1_anim_timer = 0;
+                missile1_node.visible = true;
+        if (missile2_anim_timer > 0):
+            missile2_anim_timer += 1;
+            if (missile2_anim_timer == missile_anim_reload_time):
+                missile2_anim_timer = 0;
+                missile2_node.visible = true;
 
 func select_enemy():
     var enemy_progress_array = [];
@@ -57,6 +78,12 @@ func fire_projectile():
 
 func fire_missile():
     emit_signal("fire_missile", self.position, enemy, GameData.tower_data[type]["damage"]);
+    if (missile1_anim_timer == 0):
+        missile1_anim_timer += 1;
+        missile1_node.visible = false;
+    elif (missile2_anim_timer == 0):
+        missile2_anim_timer += 1;
+        missile2_node.visible = false;
 
 func turn():
     get_node("Turret").look_at(enemy.position);
