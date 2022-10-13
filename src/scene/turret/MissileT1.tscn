@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://asset/tower/towerDefense_tile228.png" type="Texture" id=1]
 [ext_resource path="res://asset/tower/towerDefense_tile251.png" type="Texture" id=2]
@@ -23,6 +23,38 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "FireMissile"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Turret/Missile1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "FireMissile"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Turret/Missile2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
 }
 
 [node name="MissileT1" type="Node2D"]
@@ -52,6 +84,12 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Fire = SubResource( 2 )
+
+[node name="AnimationPlayerMissile1" type="AnimationPlayer" parent="."]
+anims/FireMissile = SubResource( 3 )
+
+[node name="AnimationPlayerMissile2" type="AnimationPlayer" parent="."]
+anims/FireMissile = SubResource( 4 )
 
 [connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]

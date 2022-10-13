@@ -7,6 +7,10 @@ var enemy;
 var ready = true;
 var category;
 
+var missile1_node;
+var missile2_node;
+var isLeftMissileFired = false;
+
 signal fire_missile(base_position, enemy, damage);
 
 func _init():
@@ -15,6 +19,9 @@ func _init():
 
 func _ready():
     if built:
+        if (category == "Missile"):
+            missile1_node = self.get_node("Turret/Missile1");
+            missile2_node = self.get_node("Turret/Missile2");
         self.get_node("Range/CollisionShape2D").get_shape().radius = 0.5 * GameData.tower_data[type]["range"];
 
 func _process(delta):
@@ -56,7 +63,14 @@ func fire_projectile():
     get_node("AnimationPlayer").play("Fire");
 
 func fire_missile():
-    emit_signal("fire_missile", self.position, enemy, GameData.tower_data[type]["damage"]);
+    if (!isLeftMissileFired):
+        get_node("AnimationPlayerMissile1").play("FireMissile");
+        emit_signal("fire_missile", self.position + missile1_node.position, enemy, GameData.tower_data[type]["damage"]);
+        isLeftMissileFired = true;
+    else:
+        get_node("AnimationPlayerMissile2").play("FireMissile");
+        emit_signal("fire_missile", self.position + missile2_node.position, enemy, GameData.tower_data[type]["damage"]);
+        isLeftMissileFired = false;
 
 func turn():
     get_node("Turret").look_at(enemy.position);
