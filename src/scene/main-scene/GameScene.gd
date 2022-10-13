@@ -57,6 +57,7 @@ func spawn_enemy_wave(enemies):
     for enemy in enemies:
         var new_enemy = load("res://scene/enemies/" + enemy[0] + ".tscn").instance();
         new_enemy.connect("base_damage", self, "on_base_damage");
+        new_enemy.connect("destroyed_with_bounty", self, "add_money");
         map_node.get_node("Path").add_child(new_enemy, true);
         yield(get_tree().create_timer(enemy[1]), "timeout");
 
