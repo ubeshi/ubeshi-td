@@ -83,12 +83,12 @@ func update_tower_preview():
 
     var is_tile_valid = map_node.get_node("TowerExclusion").get_cellv(current_tile) == -1;
     if is_tile_valid:
-        get_node("UI").update_tower_preview(tile_position, "ad54ff3c");
+        get_node("UI").update_tower_preview(tile_position, GameData.ubeshi_color.GREEN_TRANSPARENT);
         build_valid = true;
         build_location = tile_position;
         build_tile = current_tile;
     else:
-        get_node("UI").update_tower_preview(tile_position, "adff4545");
+        get_node("UI").update_tower_preview(tile_position, GameData.ubeshi_color.LIME_TRANSPARENT);
         build_valid = false;
 
 func cancel_build_mode():
@@ -103,6 +103,7 @@ func verify_and_build():
         new_tower.built = true;
         new_tower.type = build_type;
         new_tower.category = GameData.tower_data[build_type]["category"];
+        new_tower.connect("fire_missile", self, "on_fire_missile");
         map_node.get_node("Turrets").add_child(new_tower, true);
         map_node.get_node("TowerExclusion").set_cellv(build_tile, 5);
         # Update cash
@@ -119,3 +120,12 @@ func on_base_damage(damage):
 func add_money(amount):
     current_money += amount;
     money_node.text = str(current_money);
+
+func on_fire_missile(position, enemy, damage):
+    var new_missile = load("res://scene/support-scene/Missile.tscn").instance();
+    new_missile.position = position + Vector2(30, 30);
+    new_missile.enemy = enemy;
+    new_missile.velocity = enemy.position - position;
+    new_missile.damage = damage;
+    map_node.get_node("Projectiles").add_child(new_missile, true);
+    new_missile.look_at(enemy.position);
