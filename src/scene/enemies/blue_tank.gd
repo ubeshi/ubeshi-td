@@ -3,9 +3,11 @@ extends PathFollow2D
 var speed = 150;
 var hp = 150;
 var base_damage = 21;
+var bounty = 100;
 
 signal base_damage(damage);
 signal destroyed_with_bounty(bounty_amount);
+signal enemy_destroy();
 
 onready var health_bar = get_node("HealthBar");
 onready var impact_area = get_node("Impact");
@@ -50,7 +52,8 @@ func impact():
 
 func on_destroy():
     isAlive = false;
-    emit_signal("destroyed_with_bounty", 1);
+    emit_signal("destroyed_with_bounty", bounty);
+    emit_signal("enemy_destroy");
     # get_node("KBody").queue_free();
     yield(get_tree().create_timer(0.2), "timeout");
     self.queue_free();

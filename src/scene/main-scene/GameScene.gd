@@ -25,7 +25,6 @@ func _ready():
     for i in get_tree().get_nodes_in_group("build_buttons"):
         i.connect("pressed", self, "initiate_build_mode", [i.get_name()]);
 
-
 func _process(delta):
     if build_mode:
         update_tower_preview();
@@ -47,19 +46,28 @@ func start_next_wave():
     spawn_enemy_wave(wave_data);
 
 func retrieve_wave_data():
-    var enemies = [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]];
-    current_wave += 1;
-    enemies_in_wave = enemies.size();
+    var enemies = GameData.wave_data[current_wave];
+    enemies_in_wave += enemies.size();
+    get_node("UI").update_enemy_count(enemies_in_wave);
     return enemies;
 
 func spawn_enemy_wave(enemies):
-    print(enemies);
     for enemy in enemies:
         var new_enemy = load("res://scene/enemies/" + enemy[0] + ".tscn").instance();
         new_enemy.connect("base_damage", self, "on_base_damage");
+        new_enemy.connect("enemy_destroy", self, "on_enemy_destroy");
         new_enemy.connect("destroyed_with_bounty", self, "add_money");
         map_node.get_node("Path").add_child(new_enemy, true);
         yield(get_tree().create_timer(enemy[1]), "timeout");
+        
+func on_enemy_destroy():
+    decrement_enemy_wave();
+
+func decrement_enemy_wave():
+    enemies_in_wave -= 1;
+    if enemies_in_wave < 0:
+        enemies_in_wave = 0;
+    get_node("UI").update_enemy_count(enemies_in_wave);
 
 ##
 ## Build Functions
@@ -117,6 +125,7 @@ func on_base_damage(damage):
         emit_signal("game_finished", false);
     else:
         get_node("UI").update_health_bar(base_health);
+    decrement_enemy_wave();
 
 func add_money(amount):
     current_money += amount;
