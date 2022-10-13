@@ -45,6 +45,6 @@ func impact():
     impact_area.add_child(new_impact);
     
 func on_destroy():
-    get_node("KinematicBody2D").queue_free();
+    # get_node("KBody").queue_free();
     yield(get_tree().create_timer(0.2), "timeout");
     self.queue_free();
