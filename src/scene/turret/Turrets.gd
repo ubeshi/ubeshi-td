@@ -10,15 +10,15 @@ var category;
 func _init():
     # Runs when the scene initializes
     pass;
-    
+
 func _ready():
     if built:
         self.get_node("Range/CollisionShape2D").get_shape().radius = 0.5 * GameData.tower_data[type]["range"];
-    
+
 func _process(delta):
     # Renders on every frame that has been rendered - depends on monitor refresh rate
     pass;
-    
+
 func _physics_process(delta):
     # Runs on every physics frame (different than render)
     # Edit this in Project -> Project Settings -> Physics
@@ -30,7 +30,7 @@ func _physics_process(delta):
             fire();
     else:
         enemy = null;
-    
+
 func select_enemy():
     var enemy_progress_array = [];
     for i in enemy_array:
@@ -51,7 +51,7 @@ func fire():
 
 func fire_projectile():
     get_node("AnimationPlayer").play("Fire");
-    
+
 func fire_missile():
     pass;
 

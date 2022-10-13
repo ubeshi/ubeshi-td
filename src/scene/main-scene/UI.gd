@@ -6,16 +6,16 @@ onready var hp_bar_tween = get_node("HUD/InfoBar/HBoxContainer/HP/Tween");
 func set_tower_preview(tower_type, mouse_position):
     var drag_tower = load("res://scene/turret/" + tower_type + ".tscn").instance();
     drag_tower.set_name("DragTower");
-    drag_tower.modulate = Color("ad54ff3c");
-    
+    drag_tower.modulate = Color(GameData.ubeshi_color.GREEN_TRANSPARENT);
+
     var range_texture = Sprite.new();
     range_texture.position = Vector2(32, 32);
     var scaling = GameData.tower_data[tower_type]["range"] / 600.0;
     range_texture.scale = Vector2(scaling, scaling);
     var texture = load("res://asset/environment/tileset/range_overlay.png");
     range_texture.texture = texture;
-    range_texture.modulate = Color("ad54ff3c");
-    
+    range_texture.modulate = Color(GameData.ubeshi_color.GREEN_TRANSPARENT);
+
     var control = Control.new();
     control.add_child(range_texture, true);
     control.add_child(drag_tower, true);
@@ -57,8 +57,8 @@ func update_health_bar(base_health):
     hp_bar_tween.interpolate_property(hp_bar, "value", hp_bar.value, base_health, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT);
     hp_bar_tween.start();
     if base_health >= 60:
-        hp_bar.set_tint_progress("4eff15"); # Green
+        hp_bar.set_tint_progress(GameData.ubeshi_color.GREEN);
     elif base_health < 60 and base_health >= 25:
-        hp_bar.set_tint_progress("e1be32"); # Orange
+        hp_bar.set_tint_progress(GameData.ubeshi_color.ORANGE);
     elif base_health < 25:
-        hp_bar.set_tint_progress("e11e1e"); # Red
+        hp_bar.set_tint_progress(GameData.ubeshi_color.RED);

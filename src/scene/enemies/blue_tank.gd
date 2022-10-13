@@ -21,7 +21,7 @@ func _physics_process(delta):
         emit_signal("base_damage", base_damage);
         queue_free();
     move(delta);
-    
+
 func move(delta):
     set_offset(get_offset() + speed * delta);
     health_bar.set_position(position - Vector2(30, 30));
@@ -33,7 +33,7 @@ func on_hit(damage):
     health_bar.value = hp;
     if (hp <= 0):
         on_destroy();
-    
+
 func impact():
     randomize();
     var x_pos = randi() % 31;
@@ -43,7 +43,7 @@ func impact():
     var new_impact = projectile_impact.instance();
     new_impact.position = impact_location;
     impact_area.add_child(new_impact);
-    
+
 func on_destroy():
     get_node("KinematicBody2D").queue_free();
     yield(get_tree().create_timer(0.2), "timeout");

@@ -14,3 +14,11 @@ var tower_data = {
         "category": "Missile"
     },
 }
+
+var ubeshi_color = {
+    "GREEN": "4EFF15",
+    "ORANGE": "E1BE32",
+    "RED": "E11E1E",
+    "GREEN_TRANSPARENT": "AD54FF3C",
+    "LIME_TRANSPARENT": "ADFF4545",
+}
