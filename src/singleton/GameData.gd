@@ -6,11 +6,13 @@ var tower_data = {
         "rof": 0.3,
         "range": 350,
         "category": "Projectile",
+        "cost": 200,
     },
     "MissileT1": {
         "damage": 100,
         "rof": 3,
         "range": 550,
-        "category": "Missile"
+        "category": "Missile",
+        "cost": 500,
     },
 }
