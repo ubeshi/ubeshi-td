@@ -22,3 +22,11 @@ var ubeshi_color = {
     "GREEN_TRANSPARENT": "AD54FF3C",
     "LIME_TRANSPARENT": "ADFF4545",
 }
+
+var wave_data = {
+    1: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],
+    2: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],
+    3: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],
+    4: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],
+    5: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],   
+}

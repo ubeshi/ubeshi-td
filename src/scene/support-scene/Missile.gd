@@ -7,8 +7,6 @@ var damage;
 
 func _physics_process(delta):
     var collision_info = move_and_collide(velocity.normalized() * delta * speed)
-    if collision_info:
-        print(collision_info.get_collider().get_parent());
-        print("hit");
+    if collision_info and collision_info.get_collider().name == "TankKBody":
         collision_info.get_collider().get_parent().on_hit(damage);
         self.free()

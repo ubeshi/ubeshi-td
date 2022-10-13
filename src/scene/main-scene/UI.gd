@@ -2,6 +2,8 @@ extends CanvasLayer
 
 onready var hp_bar = get_node("HUD/InfoBar/HBoxContainer/HP");
 onready var hp_bar_tween = get_node("HUD/InfoBar/HBoxContainer/HP/Tween");
+onready var wave_number = get_node("HUD/WaveBar/HBoxContainer/Wave");
+onready var enemy_count = get_node("HUD/WaveBar/HBoxContainer/Enemies");
 
 func set_tower_preview(tower_type, mouse_position):
     var drag_tower = load("res://scene/turret/" + tower_type + ".tscn").instance();
@@ -39,9 +41,6 @@ func _on_PausePlay_pressed():
         get_parent().cancel_build_mode();
     if get_tree().is_paused():
         get_tree().paused = false;
-    elif get_parent().current_wave == 0:
-        get_parent().current_wave += 1;
-        get_parent().start_next_wave();
     else:
         get_tree().paused = true;
 
@@ -52,6 +51,12 @@ func _on_Speedup_pressed():
         Engine.set_time_scale(1.0);
     else:
         Engine.set_time_scale(2.0);
+        
+func update_enemy_count(count):
+    enemy_count.text = str(count);
+        
+func update_wave_number(wave):
+    wave_number.text = str(wave);
 
 func update_health_bar(base_health):
     hp_bar_tween.interpolate_property(hp_bar, "value", hp_bar.value, base_health, 0.1, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT);
@@ -62,3 +67,9 @@ func update_health_bar(base_health):
         hp_bar.set_tint_progress(GameData.ubeshi_color.ORANGE);
     elif base_health < 25:
         hp_bar.set_tint_progress(GameData.ubeshi_color.RED);
+
+func _on_NextWaveButton_pressed():
+    if get_parent().current_wave < 5:
+        get_parent().current_wave += 1;
+    get_parent().start_next_wave();
+    update_wave_number(get_parent().current_wave);

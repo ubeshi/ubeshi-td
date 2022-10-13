@@ -53,7 +53,6 @@ text = "New Game
 "
 align = 1
 valign = 1
-percent_visible = -0.142857
 
 [node name="Control" type="Control" parent="Margin/VBoxContainer"]
 margin_top = 192.0

@@ -9,6 +9,8 @@ signal base_damage(damage);
 onready var health_bar = get_node("HealthBar");
 onready var impact_area = get_node("Impact");
 
+signal enemy_destroy();
+
 var projectile_impact = preload("res://scene/support-scene/ProjectileImpact.tscn");
 
 func _ready():
@@ -45,6 +47,7 @@ func impact():
     impact_area.add_child(new_impact);
 
 func on_destroy():
-    # get_node("KBody").queue_free();
+    get_node("TankKBody").queue_free();
+    emit_signal("enemy_destroy");
     yield(get_tree().create_timer(0.2), "timeout");
     self.queue_free();
