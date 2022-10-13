@@ -7,11 +7,9 @@ var enemy;
 var ready = true;
 var category;
 
-var missile_anim_reload_time = 200;
-var missile1_anim_timer = 0;
-var missile2_anim_timer = 0;
 var missile1_node;
 var missile2_node;
+var isLeftMissileFired = false;
 
 signal fire_missile(base_position, enemy, damage);
 
@@ -42,18 +40,6 @@ func _physics_process(delta):
     else:
         enemy = null;
 
-    if (category == "Missile"):
-        if (missile1_anim_timer > 0):
-            missile1_anim_timer += 1;
-            if (missile1_anim_timer == missile_anim_reload_time):
-                missile1_anim_timer = 0;
-                missile1_node.visible = true;
-        if (missile2_anim_timer > 0):
-            missile2_anim_timer += 1;
-            if (missile2_anim_timer == missile_anim_reload_time):
-                missile2_anim_timer = 0;
-                missile2_node.visible = true;
-
 func select_enemy():
     var enemy_progress_array = [];
     for i in enemy_array:
@@ -77,14 +63,14 @@ func fire_projectile():
     get_node("AnimationPlayer").play("Fire");
 
 func fire_missile():
-    if (missile1_anim_timer == 0):
-        missile1_anim_timer += 1;
-        missile1_node.visible = false;
+    if (!isLeftMissileFired):
+        get_node("AnimationPlayerMissile1").play("FireMissile");
         emit_signal("fire_missile", self.position + missile1_node.position, enemy, GameData.tower_data[type]["damage"]);
-    elif (missile2_anim_timer == 0):
-        missile2_anim_timer += 1;
-        missile2_node.visible = false;
+        isLeftMissileFired = true;
+    else:
+        get_node("AnimationPlayerMissile2").play("FireMissile");
         emit_signal("fire_missile", self.position + missile2_node.position, enemy, GameData.tower_data[type]["damage"]);
+        isLeftMissileFired = false;
 
 func turn():
     get_node("Turret").look_at(enemy.position);
