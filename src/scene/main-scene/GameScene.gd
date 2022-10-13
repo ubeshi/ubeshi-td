@@ -108,7 +108,7 @@ func verify_and_build():
         map_node.get_node("TowerExclusion").set_cellv(build_tile, 5);
         # Update cash
         var tower_cost = GameData.tower_data[build_type].cost;
-        add_money(-tower_cost);
+        add_money(-1 * tower_cost);
 
 func on_base_damage(damage):
     base_health -= damage;
