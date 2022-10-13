@@ -5,9 +5,12 @@ var hp = 150;
 var base_damage = 21;
 
 signal base_damage(damage);
+signal destroyed_with_bounty(bounty_amount);
 
 onready var health_bar = get_node("HealthBar");
 onready var impact_area = get_node("Impact");
+
+var isAlive = true;
 
 var projectile_impact = preload("res://scene/support-scene/ProjectileImpact.tscn");
 
@@ -27,12 +30,13 @@ func move(delta):
     health_bar.set_position(position - Vector2(30, 30));
 
 func on_hit(damage):
-    impact();
-    print(health_bar.value);
-    hp -= damage;
-    health_bar.value = hp;
-    if (hp <= 0):
-        on_destroy();
+    if (isAlive):
+        impact();
+        print(health_bar.value);
+        hp -= damage;
+        health_bar.value = hp;
+        if (hp <= 0):
+            on_destroy();
 
 func impact():
     randomize();
@@ -45,6 +49,8 @@ func impact():
     impact_area.add_child(new_impact);
 
 func on_destroy():
+    isAlive = false;
+    emit_signal("destroyed_with_bounty", 1);
     # get_node("KBody").queue_free();
     yield(get_tree().create_timer(0.2), "timeout");
     self.queue_free();
