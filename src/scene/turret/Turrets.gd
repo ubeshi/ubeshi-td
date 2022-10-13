@@ -77,13 +77,14 @@ func fire_projectile():
     get_node("AnimationPlayer").play("Fire");
 
 func fire_missile():
-    emit_signal("fire_missile", self.position, enemy, GameData.tower_data[type]["damage"]);
     if (missile1_anim_timer == 0):
         missile1_anim_timer += 1;
         missile1_node.visible = false;
+        emit_signal("fire_missile", self.position + missile1_node.position, enemy, GameData.tower_data[type]["damage"]);
     elif (missile2_anim_timer == 0):
         missile2_anim_timer += 1;
         missile2_node.visible = false;
+        emit_signal("fire_missile", self.position + missile2_node.position, enemy, GameData.tower_data[type]["damage"]);
 
 func turn():
     get_node("Turret").look_at(enemy.position);
