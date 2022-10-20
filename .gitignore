@@ -2,3 +2,4 @@ src/.import
 build
 .directory
 *~
+node_modules
