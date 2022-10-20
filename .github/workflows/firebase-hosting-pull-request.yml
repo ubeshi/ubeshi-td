@@ -27,7 +27,7 @@ jobs:
         run: godot -v --export "HTML5" ../build/web/index.html src/project.godot
 
       - name: Setup node
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
