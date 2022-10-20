@@ -51,10 +51,10 @@ func _on_Speedup_pressed():
         Engine.set_time_scale(1.0);
     else:
         Engine.set_time_scale(2.0);
-        
+
 func update_enemy_count(count):
     enemy_count.text = str(count);
-        
+
 func update_wave_number(wave):
     wave_number.text = str(wave);
 
