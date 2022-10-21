@@ -30,5 +30,5 @@ var wave_data = {
     2: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],
     3: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],
     4: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],
-    5: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],   
+    5: [["blue_tank", 0.7], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0], ["blue_tank", 1.0]],
 }

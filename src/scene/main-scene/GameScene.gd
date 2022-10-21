@@ -59,7 +59,7 @@ func spawn_enemy_wave(enemies):
         new_enemy.connect("destroyed_with_bounty", self, "add_money");
         map_node.get_node("Path").add_child(new_enemy, true);
         yield(get_tree().create_timer(enemy[1]), "timeout");
-        
+
 func on_enemy_destroy():
     decrement_enemy_wave();
 
