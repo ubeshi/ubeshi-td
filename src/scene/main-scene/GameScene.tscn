@@ -84,16 +84,15 @@ anchor_bottom = 1.0
 texture = ExtResource( 3 )
 
 [node name="GameControls" type="HBoxContainer" parent="UI/HUD"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -164.0
-margin_top = -90.0
-margin_right = -20.0
-margin_bottom = -20.0
+anchor_left = 0.871875
+anchor_top = 0.875
+anchor_right = 0.984375
+anchor_bottom = 0.972222
 size_flags_horizontal = 4
 size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="PausePlay" type="TextureButton" parent="UI/HUD/GameControls"]
 pause_mode = 2
@@ -114,15 +113,16 @@ texture_normal = ExtResource( 9 )
 expand = true
 
 [node name="Wave Controls" type="HBoxContainer" parent="UI/HUD"]
-anchor_left = 1.0
-anchor_top = 1.0
+anchor_left = 0.8
+anchor_top = 0.763889
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -256.0
-margin_top = -170.0
-margin_bottom = -200.0
+anchor_bottom = 0.834722
+margin_bottom = -81.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="NextWaveButton" type="Button" parent="UI/HUD/Wave Controls"]
 margin_right = 256.0
@@ -132,16 +132,18 @@ text = " Next Wave"
 
 [node name="WaveBar" type="ColorRect" parent="UI/HUD"]
 self_modulate = Color( 0.0431373, 0.0313726, 0.196078, 0.513726 )
-anchor_top = 1.0
+anchor_top = 0.916667
+anchor_right = 0.46875
 anchor_bottom = 1.0
-margin_top = -60.0
-margin_right = 600.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 0, 60 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
 color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/WaveBar"]
 anchor_top = 1.0
@@ -202,7 +204,12 @@ valign = 1
 [node name="InfoBar" type="ColorRect" parent="UI/HUD"]
 self_modulate = Color( 0.0431373, 0.0313726, 0.196078, 0.513726 )
 anchor_right = 1.0
+anchor_bottom = 0.0833333
+margin_bottom = -60.0
 rect_min_size = Vector2( 0, 60 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/InfoBar"]
 anchor_right = 1.0
