@@ -274,6 +274,7 @@ margin_bottom = 60.0
 rect_min_size = Vector2( 70, 0 )
 
 [node name="DetailBar" type="ColorRect" parent="UI/HUD"]
+visible = false
 self_modulate = Color( 0.917647, 0.560784, 0.560784, 0.572549 )
 margin_left = 980.0
 margin_top = 160.0
