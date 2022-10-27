@@ -59,7 +59,6 @@ func turn():
 func _on_Select_input_event(viewport, event, _shape_idx):
     if event is InputEventMouseButton:
         if event.button_index == BUTTON_LEFT and event.pressed:
-            print("clicked");
             emit_signal("on_tower_select", title, description);
 
 func _on_Range_body_entered(body):
