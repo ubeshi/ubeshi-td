@@ -18,14 +18,25 @@ var money_node
 var starting_money = 1000
 var current_money = starting_money
 
+var a_star
+var path_2d
+var map_x_offset = 0
+var map_y_offset = 1
+var map_cell_size = 64
+var map_width = 20
+var map_height = 10
+var map_enemy_spawn_point_id = 0
+var map_enemy_goal_point_id = 199
+
 func _ready():
     money_node = get_node("UI/HUD/InfoBar/HBoxContainer/Money");
     money_node.text = str(current_money);
     map_node = get_node("Map1"); ## Turn this into a variable based on selected map
+    initialize_enemy_path();
     for i in get_tree().get_nodes_in_group("build_buttons"):
         i.connect("pressed", self, "initiate_build_mode", [i.get_name()]);
 
-func _process(delta):
+func _process(_delta):
     if build_mode:
         update_tower_preview();
 
@@ -117,6 +128,7 @@ func verify_and_build():
         map_node.get_node("TowerExclusion").set_cellv(build_tile, 5);
         # Update cash
         var tower_cost = GameData.tower_data[build_type].cost;
+        obstruct_path_at_location(build_location);
         add_money(-1 * tower_cost);
 
 func on_base_damage(damage):
@@ -139,3 +151,24 @@ func on_fire_missile(position, enemy, damage):
     new_missile.damage = damage;
     map_node.get_node("Projectiles").add_child(new_missile, true);
     new_missile.look_at(enemy.position);
+
+func initialize_enemy_path() -> void:
+    var point_translation = UbeshiAStar.PointTranslation.new(map_x_offset, map_y_offset);
+    a_star = UbeshiAStar.get_new_map(map_width, map_height, point_translation);
+    update_path(a_star);
+
+func obstruct_path_at_location(location: Vector2) -> void:
+    var centered_x = location.x + map_cell_size / 2;
+    var centered_y = location.y + map_cell_size / 2;
+    var vector3 = Vector3(centered_x, centered_y, 0);
+    var point_id = a_star.get_closest_point(vector3, true);
+    a_star.set_point_disabled(point_id, true);
+    update_path(a_star);
+
+func update_path(a_star: AStar) -> void:
+    if path_2d != null:
+        map_node.remove_child(path_2d);
+    var point_array = UbeshiAStar.get_pool_vector2_array(a_star, map_enemy_spawn_point_id, map_enemy_goal_point_id);
+    path_2d = UbeshiAStar.get_path_2d_from_vector2_array(point_array);
+    path_2d.name = "Path";
+    map_node.add_child(path_2d);
