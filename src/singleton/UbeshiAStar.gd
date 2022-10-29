@@ -22,7 +22,7 @@ func add_map_points(a_star: AStar, width: int, height: int, point_translation: P
         add_map_points_row(a_star, width, y_position, point_translation);
 
 func add_map_points_row(a_star: AStar, width: int, y_position: int, point_translation: PointTranslation) -> void:
-    var point_id = a_star.get_available_point_id();
+    var point_id = width * y_position;
     var cell_center_offset = 0.5 * point_translation.cell_size;
     for x_position in range(0, width):
         var translated_x = (x_position + point_translation.x_offset) * point_translation.cell_size + cell_center_offset;
