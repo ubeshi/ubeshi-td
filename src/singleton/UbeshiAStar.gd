@@ -51,9 +51,7 @@ func get_pool_vector2_array(a_star: AStar, from_point_id: int, to_point_id: int)
 
     return array;
 
-func get_path_2d_from_vector2_array(array: PoolVector2Array) -> Path2D:
-    var path_2d = Path2D.new();
+func replace_path_2d_points_with_vector2_array(path_2d: Path2D, array: PoolVector2Array) -> void:
+    path_2d.curve.clear_points();
     for point in array:
         path_2d.curve.add_point(point);
-
-    return path_2d;

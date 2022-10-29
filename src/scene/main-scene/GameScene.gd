@@ -32,6 +32,7 @@ func _ready():
     money_node = get_node("UI/HUD/InfoBar/HBoxContainer/Money");
     money_node.text = str(current_money);
     map_node = get_node("Map1"); ## Turn this into a variable based on selected map
+    path_2d = map_node.get_node("Path");
     initialize_enemy_path();
     for i in get_tree().get_nodes_in_group("build_buttons"):
         i.connect("pressed", self, "initiate_build_mode", [i.get_name()]);
@@ -166,9 +167,5 @@ func obstruct_path_at_location(location: Vector2) -> void:
     update_path(a_star);
 
 func update_path(a_star: AStar) -> void:
-    if path_2d != null:
-        map_node.remove_child(path_2d);
     var point_array = UbeshiAStar.get_pool_vector2_array(a_star, map_enemy_spawn_point_id, map_enemy_goal_point_id);
-    path_2d = UbeshiAStar.get_path_2d_from_vector2_array(point_array);
-    path_2d.name = "Path";
-    map_node.add_child(path_2d);
+    UbeshiAStar.replace_path_2d_points_with_vector2_array(path_2d, point_array);
