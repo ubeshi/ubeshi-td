@@ -5,10 +5,10 @@ class PointTranslation:
     var y_offset: int;
     var cell_size: int = 64;
 
-    func _init(x_offset: int, y_offset: int, cell_size: int = 64):
-        self.x_offset = x_offset;
-        self.y_offset = y_offset;
-        self.cell_size = cell_size;
+    func _init(p_x_offset: int, p_y_offset: int, p_cell_size: int = 64):
+        self.x_offset = p_x_offset;
+        self.y_offset = p_y_offset;
+        self.cell_size = p_cell_size;
 
 func get_new_map(width: int, height: int, point_translation: PointTranslation) -> AStar:
     var a_star = AStar.new();
