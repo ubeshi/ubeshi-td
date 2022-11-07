@@ -9,11 +9,6 @@ var category;
 var title;
 var description;
 
-var missile1_node;
-var missile2_node;
-var isLeftMissileFired = false;
-
-signal fire_missile(base_position, enemy, damage);
 signal on_tower_select(title, description);
 
 func _init():

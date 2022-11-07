@@ -1,5 +1,11 @@
 extends "res://scene/turret/Turrets.gd"
 
+var missile1_node;
+var missile2_node;
+var isLeftMissileFired = false;
+
+signal fire_missile(base_position, enemy, damage);
+
 func _ready():
   ._ready();
   if built:
