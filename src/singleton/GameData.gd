@@ -7,6 +7,8 @@ var tower_data = {
         "range": 350,
         "category": "Projectile",
         "cost": 200,
+        "title": "T1 Gun",
+        "description": "A tier one gun. Best for the rest, but it's not the lest."
     },
     "MissileT1": {
         "damage": 100,
@@ -14,6 +16,8 @@ var tower_data = {
         "range": 550,
         "category": "Missile",
         "cost": 500,
+        "title": "T1 Missile",
+        "description": "A tier one missile. Give it a star for Christmas."
     },
 }
 

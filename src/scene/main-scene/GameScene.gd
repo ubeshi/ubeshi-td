@@ -123,7 +123,10 @@ func verify_and_build():
         new_tower.position = build_location;
         new_tower.built = true;
         new_tower.type = build_type;
+        new_tower.title = GameData.tower_data[build_type]["title"];
+        new_tower.description = GameData.tower_data[build_type]["description"];
         new_tower.category = GameData.tower_data[build_type]["category"];
+        new_tower.connect("on_tower_select", self, "on_tower_select");
         new_tower.connect("fire_missile", self, "on_fire_missile");
         map_node.get_node("Turrets").add_child(new_tower, true);
         map_node.get_node("TowerExclusion").set_cellv(build_tile, 5);
@@ -131,6 +134,17 @@ func verify_and_build():
         var tower_cost = GameData.tower_data[build_type].cost;
         obstruct_path_at_location(build_location);
         add_money(-1 * tower_cost);
+
+func on_tower_select(title, description):
+    var ui_title = get_node("UI/HUD/DetailBar/VBoxContainer/TurretTitle");
+    var ui_description = get_node("UI/HUD/DetailBar/VBoxContainer/TurretDescription");
+    var ui_detailbar = get_node("UI/HUD/DetailBar");
+    
+    if !ui_detailbar.visible:
+        ui_detailbar.visible = true; 
+    
+    ui_title.text = title;
+    ui_description.text = description;
 
 func on_base_damage(damage):
     base_health -= damage;
@@ -152,6 +166,10 @@ func on_fire_missile(position, enemy, damage):
     new_missile.damage = damage;
     map_node.get_node("Projectiles").add_child(new_missile, true);
     new_missile.look_at(enemy.position);
+
+func _on_DetailBarCancelButton_pressed():
+    var ui_detailbar = get_node("UI/HUD/DetailBar");
+    ui_detailbar.visible = false;
 
 func initialize_enemy_path() -> void:
     var point_translation = UbeshiAStar.PointTranslation.new(map_x_offset, map_y_offset);

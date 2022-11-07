@@ -6,6 +6,10 @@ var built = false;
 var enemy;
 var ready = true;
 var category;
+var title;
+var description;
+
+signal on_tower_select(title, description);
 
 func _init():
     # Runs when the scene initializes
@@ -46,6 +50,11 @@ func fire():
 
 func turn():
     get_node("Turret").look_at(enemy.position);
+
+func _on_Select_input_event(viewport, event, _shape_idx):
+    if event is InputEventMouseButton:
+        if event.button_index == BUTTON_LEFT and event.pressed:
+            emit_signal("on_tower_select", title, description);
 
 func _on_Range_body_entered(body):
     if (body.name == "TankKBody"):
